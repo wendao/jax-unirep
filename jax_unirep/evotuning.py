@@ -417,6 +417,7 @@ def objective(
     n_epochs_config: Dict = None,
     learning_rate_config: Dict = None,
     n_splits: Optional[int] = 5,
+    batch_size: Optional[int] = 25,
 ) -> float:
     """
     Objective function for an Optuna trial.
@@ -484,6 +485,7 @@ def objective(
             params=params,
             n_epochs=int(n_epochs),
             step_size=learning_rate,
+            batch_size=batch_size,
         )
 
         seqs_batched, _ = length_batch_input_outputs(test_sequences)
