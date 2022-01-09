@@ -21,6 +21,12 @@ PROJECT_NAME = "evotuning_" + model_label
 
 #init_fun, apply_fun = mlstm1900()
 #_, inital_params = init_fun(PRNGKey(42), input_shape=(-1, 26))
+
+#setup func and params
+from jax_unirep.utils import load_params, get_weights_dir
+weights_dir = get_weights_dir(folderpath=None, paper_weights=int(model_label))
+print(weights_dir)
+params = load_params(folderpath=weights_dir)
 if model_label == "1900":
     from jax_unirep.evotuning_models import mlstm1900_init_fun, mlstm1900_apply_fun
     apply_fun = mlstm1900_apply_fun
@@ -37,7 +43,7 @@ lr_config = {"low": 1e-4, "high": 1e-3}
 study, evotuned_params = evotune(
     sequences=sequences,
     model_func=apply_fun,
-    params=None,
+    params=params,
     out_dom_seqs=holdout_sequences,
     n_trials=10,
     n_splits=4,
