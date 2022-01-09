@@ -83,6 +83,7 @@ def mlstm256():
     init_fun, apply_fun = serial(*model_layers)
     return init_fun, apply_fun
 
+mlstm256_init_fun, mlstm256_apply_fun = mlstm256()
 
 def mlstm64():
     """Return mLSTM64 model's initialization and forward pass functions.
@@ -112,3 +113,5 @@ def mlstm64():
     )
     init_fun, apply_fun = serial(*model_layers)
     return init_fun, apply_fun
+
+mlstm64_init_fun, mlstm64_apply_fun = mlstm64()
